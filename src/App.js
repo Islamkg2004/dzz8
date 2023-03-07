@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
+import {useState} from "react";
 
 function App() {
+  const [show, hide] = useState(false)
+
+
+  function btn () {
+    hide(!show)
+  }
+
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={!show ? {background: 'blue'} : {background: 'green'}} className='wrapper'>
+        <div>
+          <button onClick={btn} className='blue' style={!show ? {display:'none'} : {display: 'block'}}>blue</button>
+        </div>
+        <div>
+          <button onClick={btn} className='green' style={show ? {display:'none'} : {display: 'block'}}>green</button>
+        </div>
+      </div>
     </div>
   );
 }
