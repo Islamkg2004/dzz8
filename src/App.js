@@ -1,27 +1,34 @@
-import './App.css';
-import {useState} from "react";
+import React, { useState } from "react";
 
-function App() {
-  const [show, hide] = useState(false)
+function ParentComponent(props) {
+  const [child, setChild] = useState(0)
 
-
-  function btn () {
-    hide(!show)
+  function addChilren() {
+    setChild(child + 1)
   }
 
-
   return (
-    <div className="App">
-      <div style={!show ? {background: 'blue'} : {background: 'green'}} className='wrapper'>
-        <div>
-          <button onClick={btn} className='blue' style={!show ? {display:'none'} : {display: 'block'}}>blue</button>
-        </div>
-        <div>
-          <button onClick={btn} className='green' style={show ? {display:'none'} : {display: 'block'}}>green</button>
-        </div>
+      <div className="parent">
+        <h1>{props.title}</h1>
+        <button onClick={addChilren}>нажми на меня и число увеличиться на 1 </button>
+        {[...Array(child)].map((_, index) =>(
+            <ChildComponent key={index} text={`число ${index + 1}`} />
+        ))}
       </div>
-    </div>
-  );
+  )
 }
 
-export default App;
+function ChildComponent({text}) {
+  return (
+      <p>{text}</p>
+  )
+}
+
+function App() {
+  return (
+      <ParentComponent title='Число' />
+
+  )
+}
+
+export default App
